@@ -446,7 +446,7 @@ async function init() {
 function displayWelcomeMessage() {
     const welcome = `
 ╔═══════════════════════════════════════════════════════════════╗
-║            Welcome to Abe Hou's Personal Website              ║
+║            Welcome to Leo's Personal Website              ║
 ║                      Terminal Interface                       ║
 ╚═══════════════════════════════════════════════════════════════╝
 
@@ -460,12 +460,8 @@ Type 'help' for available commands, or 'ls' to list files.
 ┌─────────────────────────────────────────────────────────────────┐
 │ 📢 UPDATE                                                       │
 ├─────────────────────────────────────────────────────────────────┤
-│ For those of you who have received my email regarding the       │
-│ Battlesnake study: Yes, I am running the Battlesnake study and  │
-│ NOT being impersonated. I am using my gmail and outlook         │
-│ (abehou@outlook.com) because my Stanford email does not give    │
-│ permission to cloud-based applications. Please enroll in our    │
-│ study!! It's very fun and rewarding!                            │
+│ If you are interested in being part of a serious game study     │
+│ hit me up via email                                             │
 └─────────────────────────────────────────────────────────────────┘
 `;
     addOutput(`<div class="terminal-announcement">${announcement}</div>`, 'info');
