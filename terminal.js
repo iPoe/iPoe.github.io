@@ -286,7 +286,7 @@ function renderPlainMain() {
     html += `
         <div class="announcement">
             <div class="announcement-title">Update</div>
-            <p>For those of you who have received my email regarding the Battlesnake study: Yes, I am running the Battlesnake study and NOT being impersonated. I am using my gmail and outlook (abehou@outlook.com) because my Stanford email does not give permission to cloud-based applications. Please enroll in our study!! It's very fun and rewarding!</p>
+            <p>If you are interested in being part of a serious game study, hit me up via email!</p>
         </div>
     `;
     
