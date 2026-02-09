@@ -1,0 +1,11 @@
+{
+    "type": "directory",
+    "description": "Mis cuentos",
+    "files": {
+        "post1.txt": {
+            "title": "¡Bienvenido a mi sitio web!",
+            "date": "6 de febrero de 2026",
+            "content": "¡Gracias por pasar, gracias a Abe Hou por crear una plantilla tan increíble!"
+        }
+    }
+}

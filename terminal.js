@@ -19,7 +19,93 @@ let interactiveType = ''; // 'publications', 'experiences', 'blog'
 // View State
 let currentView = 'plain'; // 'terminal' or 'plain'
 let currentTheme = 'light'; // 'dark' or 'light'
+let currentLanguage = 'en'; // 'en' or 'es'
 let currentPlainPage = 'me'; // current page in plain view
+
+const translations = {
+    en: {
+        welcomeTitle: "Welcome to Leo's Personal Website",
+        welcomeSubtitle: "Terminal Interface",
+        helpPrompt: "Type 'help' for available commands, or 'ls' to list files.",
+        updateTitle: "📢 UPDATE",
+        updateText: "If you are interested in being part of a serious game study\nhit me up via email",
+        commandNotFound: "Command not found",
+        availableCommands: "Available commands:",
+        helpFooter: "Type 'view <filename>' to open a file, or 'cd <directory>' to navigate.",
+        filesAndDirs: "Available files and directories:",
+        publications: "PUBLICATIONS",
+        experiences: "EXPERIENCES",
+        blog: "BLOG",
+        availablePapers: "Available papers:",
+        recentPosts: "Recent posts:",
+        workExperience: "WORK EXPERIENCE:",
+        education: "EDUCATION:",
+        useViewToRead: "Use 'view <filename>' to read in detail.",
+        useViewToReadPost: "Use 'view <filename>' to read a post.",
+        interactiveHelp: "Use ↑/↓ or j/k to navigate, Enter to view, q to quit",
+        authors: "Authors:",
+        venue: "Venue:",
+        organization: "Organization:",
+        duration: "Duration:",
+        date: "Date:",
+        abstract: "ABSTRACT",
+        description: "DESCRIPTION",
+        links: "LINKS",
+        home: "Home",
+        changedDir: "Changed directory to",
+        changedHome: "Changed to home directory",
+        dirNotFound: "Directory not found",
+        isNotDir: "is not a directory. Use 'view' to open it.",
+        fileNotFound: "File not found",
+        contentsOf: "Contents of",
+        contactAndSocial: "Contact & Social",
+        pressB: "Press b to go back, q to quit, ↑↓ or j/k to scroll",
+        pressQ: "Press q to quit, ↑↓ or j/k to scroll",
+        link: "Link",
+        updateTitlePlain: "Update"
+    },
+    es: {
+        welcomeTitle: "Bienvenido al sitio web personal de Leo",
+        welcomeSubtitle: "Interfaz de Terminal",
+        helpPrompt: "Escribe 'help' para ver comandos, o 'ls' para listar archivos.",
+        updateTitle: "📢 ACTUALIZACIÓN",
+        updateText: "Si estás interesado en participar en un estudio de juegos serios\ncontáctame por correo",
+        commandNotFound: "Comando no encontrado",
+        availableCommands: "Comandos disponibles:",
+        helpFooter: "Escribe 'view <archivo>' para abrir, o 'cd <directorio>' para navegar.",
+        filesAndDirs: "Archivos y directorios disponibles:",
+        publications: "PUBLICACIONES",
+        experiences: "EXPERIENCIAS",
+        blog: "BLOG",
+        availablePapers: "Artículos disponibles:",
+        recentPosts: "Publicaciones recientes:",
+        workExperience: "EXPERIENCIA LABORAL:",
+        education: "EDUCACIÓN:",
+        useViewToRead: "Usa 'view <archivo>' para leer en detalle.",
+        useViewToReadPost: "Usa 'view <archivo>' para leer una publicación.",
+        interactiveHelp: "Usa ↑/↓ o j/k para navegar, Enter para ver, q para salir",
+        authors: "Autores:",
+        venue: "Evento:",
+        organization: "Organización:",
+        duration: "Duración:",
+        date: "Fecha:",
+        abstract: "RESUMEN",
+        description: "DESCRIPCIÓN",
+        links: "ENLACES",
+        home: "Inicio",
+        changedDir: "Directorio cambiado a",
+        changedHome: "Cambiado al directorio principal",
+        dirNotFound: "Directorio no encontrado",
+        isNotDir: "no es un directorio. Usa 'view' para abrirlo.",
+        fileNotFound: "Archivo no encontrado",
+        contentsOf: "Contenido de",
+        contactAndSocial: "Contacto y Redes Sociales",
+        pressB: "Presiona b para volver, q para salir, ↑↓ o j/k para desplazarse",
+        pressQ: "Presiona q para salir, ↑↓ o j/k para desplazarse",
+        link: "Enlace",
+        updateTitlePlain: "Actualización"
+    }
+};
 
 // DOM Elements
 const terminalOutput = document.getElementById('terminal-output');
@@ -40,7 +126,14 @@ function initializeView() {
     // Load preferences from localStorage
     const savedView = localStorage.getItem('preferredView');
     const savedTheme = localStorage.getItem('preferredTheme');
-    
+    const savedLanguage = localStorage.getItem('preferredLanguage');
+
+    // Set language
+    if (savedLanguage) {
+        currentLanguage = savedLanguage;
+    }
+    updateLanguageToggleIcon();
+
     // Set theme - default is light
     if (savedTheme) {
         currentTheme = savedTheme;
@@ -54,19 +147,19 @@ function initializeView() {
         themeBtnTerminal.querySelector('.icon').textContent = '🌙';
         themeBtnTerminal.querySelector('.label').textContent = 'Dark';
     }
-    
+
     // Set view - default to plain (web) view unless user has saved preference for terminal
     if (savedView) {
         currentView = savedView;
     }
-    
+
     // Apply view
     if (currentView === 'plain') {
         switchToPlainView();
     } else {
         switchToTerminalView();
     }
-    
+
     // Update toggle icon
     updateViewToggleIcon();
 }
@@ -75,17 +168,17 @@ function initializeView() {
 function toggleTheme() {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.body.classList.toggle('light-mode');
-    
+
     // Update plain view button
     const themeBtn = document.getElementById('theme-toggle');
     const themeIcon = themeBtn.querySelector('.icon');
     const themeLabel = themeBtn.querySelector('.label');
-    
+
     // Update terminal view button
     const themeBtnTerminal = document.getElementById('theme-toggle-terminal');
     const themeIconTerminal = themeBtnTerminal.querySelector('.icon');
     const themeLabelTerminal = themeBtnTerminal.querySelector('.label');
-    
+
     if (currentTheme === 'dark') {
         themeIcon.textContent = '☀️';
         themeLabel.textContent = 'Light';
@@ -97,20 +190,20 @@ function toggleTheme() {
         themeIconTerminal.textContent = '🌙';
         themeLabelTerminal.textContent = 'Dark';
     }
-    
+
     localStorage.setItem('preferredTheme', currentTheme);
 }
 
 // Toggle view
 function toggleView() {
     currentView = currentView === 'terminal' ? 'plain' : 'terminal';
-    
+
     if (currentView === 'plain') {
         switchToPlainView();
     } else {
         switchToTerminalView();
     }
-    
+
     localStorage.setItem('preferredView', currentView);
     updateViewToggleIcon();
 }
@@ -120,12 +213,12 @@ function updateViewToggleIcon() {
     const viewBtn = document.getElementById('view-toggle');
     const viewIcon = viewBtn.querySelector('.icon');
     const viewLabel = viewBtn.querySelector('.label');
-    
+
     // Update terminal view button
     const viewBtnTerminal = document.getElementById('view-toggle-terminal');
     const viewIconTerminal = viewBtnTerminal.querySelector('.icon');
     const viewLabelTerminal = viewBtnTerminal.querySelector('.label');
-    
+
     if (currentView === 'terminal') {
         viewIcon.textContent = '📄';
         viewLabel.textContent = 'Web';
@@ -137,6 +230,29 @@ function updateViewToggleIcon() {
         viewIconTerminal.textContent = '💻';
         viewLabelTerminal.textContent = 'Terminal';
     }
+}
+
+function updateLanguageToggleIcon() {
+    const langBtns = [
+        document.getElementById('lang-toggle'),
+        document.getElementById('lang-toggle-terminal')
+    ];
+
+    langBtns.forEach(btn => {
+        if (!btn) return;
+        const label = btn.querySelector('.label');
+        const icon = btn.querySelector('.icon');
+
+        if (currentLanguage === 'en') {
+            label.textContent = 'ES';
+            icon.textContent = '🇪🇸';
+            btn.title = "Switch to Spanish";
+        } else {
+            label.textContent = 'EN';
+            icon.textContent = '🇺🇸';
+            btn.title = "Switch to English";
+        }
+    });
 }
 
 function switchToPlainView() {
@@ -156,24 +272,60 @@ function switchToTerminalView() {
     }
 }
 
-// Load JSON data
+function toggleLanguage() {
+    currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+    localStorage.setItem('preferredLanguage', currentLanguage);
+
+    updateLanguageToggleIcon();
+
+    // Reload data and refresh view
+    loadData().then(() => {
+        if (currentView === 'terminal') {
+            clearTerminal();
+            displayWelcomeMessage();
+        } else {
+            loadPlainPage(currentPlainPage);
+        }
+    });
+
+    // Update nav links text
+    updateNavLinks();
+}
+
+function updateNavLinks() {
+    const navLinks = document.querySelectorAll('.nav-link');
+    const t = translations[currentLanguage];
+
+    navLinks.forEach(link => {
+        const page = link.dataset.page;
+        if (page === 'me') link.textContent = t.home;
+        else if (page === 'publications') link.textContent = t.publications.charAt(0) + t.publications.slice(1).toLowerCase();
+        else if (page === 'experiences') link.textContent = currentLanguage === 'es' ? 'Experiencia' : 'Experience';
+        else if (page === 'blog') link.textContent = t.blog.charAt(0) + t.blog.slice(1).toLowerCase();
+    });
+}
 async function loadData() {
     try {
         const dataFiles = ['me', 'publications', 'experiences', 'blog'];
-        const promises = dataFiles.map(file => 
-            fetch(`data/${file}.json`)
-                .then(response => response.json())
+        const suffix = currentLanguage === 'es' ? '_es' : '';
+
+        const promises = dataFiles.map(file =>
+            fetch(`data/${file}${suffix}.json`)
+                .then(response => {
+                    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                    return response.json();
+                })
                 .then(data => ({ name: file, data }))
         );
-        
+
         const results = await Promise.all(promises);
         results.forEach(({ name, data }) => {
             content[name] = data;
         });
-        
+
         // Generate dynamic summaries for directories
         generateSummaries();
-        
+
         dataLoaded = true;
         return true;
     } catch (error) {
@@ -184,20 +336,22 @@ async function loadData() {
 }
 
 // Generate dynamic summaries for directory views
+// Generate dynamic summaries for directory views
 function generateSummaries() {
+    const t = translations[currentLanguage];
     // Generate publications summary
     if (content.publications && content.publications.files) {
         let summary = `
 ╔═══════════════════════════════════════════════════════════════╗
-║                        PUBLICATIONS                           ║
+║                        ${t.publications.padEnd(31)}║
 ╚═══════════════════════════════════════════════════════════════╝
 
-Available papers:
+${t.availablePapers}
 `;
         Object.entries(content.publications.files).forEach(([filename, fileData]) => {
             summary += `  • ${filename}\n\n ${fileData.authors}\n`;
         });
-        summary += `\nUse 'view <filename>' to read a paper in detail.\nFor example: view ${Object.keys(content.publications.files)[0]}\n`;
+        summary += `\n${t.useViewToRead.replace('<filename>', Object.keys(content.publications.files)[0])}\n`;
         content.publications.summary = summary;
     }
 
@@ -205,31 +359,31 @@ Available papers:
     if (content.experiences && content.experiences.files) {
         let summary = `
 ╔═══════════════════════════════════════════════════════════════╗
-║                         EXPERIENCES                           ║
+║                         ${t.experiences.padEnd(30)}║
 ╚═══════════════════════════════════════════════════════════════╝
 
 `;
         const files = Object.entries(content.experiences.files);
         const positions = files.filter(([name]) => name.startsWith('position'));
         const education = files.filter(([name]) => name.startsWith('education'));
-        
+
         if (positions.length > 0) {
-            summary += `WORK EXPERIENCE:\n`;
+            summary += `${t.workExperience}\n`;
             positions.forEach(([filename, fileData]) => {
                 summary += `  • ${filename} - ${fileData.title}\n`;
             });
             summary += '\n';
         }
-        
+
         if (education.length > 0) {
-            summary += `EDUCATION:\n`;
+            summary += `${t.education}\n`;
             education.forEach(([filename, fileData]) => {
                 const shortOrg = fileData.organization.split(' ').slice(0, 2).join(' ');
                 summary += `  • ${filename} - ${fileData.title} (${shortOrg})\n`;
             });
         }
-        
-        summary += `\nUse 'view <filename>' to read more details.\nFor example: view ${Object.keys(content.experiences.files)[0]}\n`;
+
+        summary += `\n${t.useViewToRead.replace('<filename>', Object.keys(content.experiences.files)[0])}\n`;
         content.experiences.summary = summary;
     }
 
@@ -237,15 +391,15 @@ Available papers:
     if (content.blog && content.blog.files) {
         let summary = `
 ╔═══════════════════════════════════════════════════════════════╗
-║                            BLOG                               ║
+║                            ${t.blog.padEnd(27)}║
 ╚═══════════════════════════════════════════════════════════════╝
 
-Recent posts:
+${t.recentPosts}
 `;
         Object.entries(content.blog.files).forEach(([filename, fileData]) => {
             summary += `  • ${filename} - ${fileData.title} (${fileData.date})\n`;
         });
-        summary += `\nUse 'view <filename>' to read a post.\nFor example: view ${Object.keys(content.blog.files)[0]}\n`;
+        summary += `\n${t.useViewToReadPost.replace('<filename>', Object.keys(content.blog.files)[0])}\n`;
         content.blog.summary = summary;
     }
 }
@@ -253,7 +407,7 @@ Recent posts:
 // Plain View Page Loader
 function loadPlainPage(page) {
     currentPlainPage = page;
-    
+
     // Update active nav link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
@@ -261,7 +415,7 @@ function loadPlainPage(page) {
             link.classList.add('active');
         }
     });
-    
+
     // Render content
     if (page === 'me') {
         renderPlainMain();
@@ -277,43 +431,44 @@ function loadPlainPage(page) {
 function renderPlainMain() {
     const meData = content.me;
     if (!meData) return;
-    
+
     // Convert terminal content to HTML
     const lines = meData.content.split('\n');
     let html = '<div class="main-content">';
-    
+
     // Add announcement box
+    const t = translations[currentLanguage];
     html += `
         <div class="announcement">
-            <div class="announcement-title">Update</div>
-            <p>If you are interested in being part of a serious game study, hit me up via email!</p>
+            <div class="announcement-title">${t.updateTitlePlain}</div>
+            <p>${t.updateText.replace('\n', ' ')}</p>
         </div>
     `;
-    
+
     for (const line of lines) {
         // Skip all separator lines (===, ---, ╔, ╚, ║, etc.)
-        if (line.includes('═') || line.includes('─') || 
+        if (line.includes('═') || line.includes('─') ||
             line.includes('╔') || line.includes('╚') || line.includes('║')) {
             continue;
         }
-        
+
         if (line.trim().startsWith('ABE HOU')) {
             continue;
-        } else if (line.includes('CONTACT & SOCIAL')) {
-            html += '<h3>Contact & Social</h3>';
+        } else if (line.includes('CONTACT & SOCIAL') || line.includes('CONTACTO Y REDES SOCIALES')) {
+            html += `<h3>${t.contactAndSocial}</h3>`;
         } else if (line.includes('http')) {
             // Convert URLs to links
             const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
             if (urlMatch) {
                 const url = urlMatch[1];
-                const label = line.split(':')[0].trim() || 'Link';
+                const label = line.split(':')[0].trim() || t.link;
                 html += `<p><strong>${label}:</strong> <a href="${url}" target="_blank">${url}</a></p>`;
             }
         } else if (line.trim()) {
             html += `<p>${line.trim()}</p>`;
         }
     }
-    
+
     html += '</div>';
     plainContent.innerHTML = html;
 }
@@ -321,9 +476,9 @@ function renderPlainMain() {
 function renderPlainPublications() {
     const pubs = content.publications;
     if (!pubs || !pubs.files) return;
-    
+
     let html = '<h2>Publications</h2>';
-    
+
     Object.entries(pubs.files).forEach(([filename, pub]) => {
         html += `
             <div class="item">
@@ -333,27 +488,27 @@ function renderPlainPublications() {
                 <div class="item-meta">${pub.abstract}</div>
                 <div class="item-links">
                     ${pub.links.split('|').map(link => {
-                        const match = link.trim().match(/\[(.*?)\]\s*(.*)/);
-                        if (match) {
-                            const [, text, url] = match;
-                            return url.trim() === '#' ? `<span style="color: #888;">[${text}]</span>` : `<a href="${url.trim()}" target="_blank">[${text}]</a>`;
-                        }
-                        return '';
-                    }).join(' ')}
+            const match = link.trim().match(/\[(.*?)\]\s*(.*)/);
+            if (match) {
+                const [, text, url] = match;
+                return url.trim() === '#' ? `<span style="color: #888;">[${text}]</span>` : `<a href="${url.trim()}" target="_blank">[${text}]</a>`;
+            }
+            return '';
+        }).join(' ')}
                 </div>
             </div>
         `;
     });
-    
+
     plainContent.innerHTML = html;
 }
 
 function renderPlainExperiences() {
     const exps = content.experiences;
     if (!exps || !exps.files) return;
-    
+
     let html = '<h2>Experience</h2>';
-    
+
     Object.entries(exps.files).forEach(([filename, exp]) => {
         html += `
             <div class="item">
@@ -363,16 +518,16 @@ function renderPlainExperiences() {
             </div>
         `;
     });
-    
+
     plainContent.innerHTML = html;
 }
 
 function renderPlainBlog() {
     const blog = content.blog;
     if (!blog || !blog.files) return;
-    
+
     let html = '<h2>Blog</h2>';
-    
+
     Object.entries(blog.files).forEach(([filename, post]) => {
         html += `
             <div class="item">
@@ -382,7 +537,7 @@ function renderPlainBlog() {
             </div>
         `;
     });
-    
+
     plainContent.innerHTML = html;
 }
 
@@ -393,17 +548,17 @@ async function init() {
         addOutput('Loading content...', 'info');
     }
     const loaded = await loadData();
-    
+
     if (!loaded) {
         if (terminalOutput) {
             addOutput('Failed to load content. Please refresh the page.', 'error');
         }
         return;
     }
-    
+
     // Initialize view (must be after data is loaded)
     initializeView();
-    
+
     // Terminal-specific initialization
     if (terminalOutput) {
         clearTerminal();
@@ -412,19 +567,19 @@ async function init() {
             terminalInput.focus();
         }
     }
-    
+
     // Event listeners for toggles (both terminal and plain view buttons)
     document.getElementById('theme-toggle').addEventListener('click', toggleTheme);
     document.getElementById('view-toggle').addEventListener('click', toggleView);
     document.getElementById('theme-toggle-terminal').addEventListener('click', toggleTheme);
     document.getElementById('view-toggle-terminal').addEventListener('click', toggleView);
-    
+
     // Terminal event listeners
     if (terminalInput) {
         terminalInput.addEventListener('keydown', handleInput);
     }
     document.addEventListener('keydown', handleVimKeypress);
-    
+
     // Plain view nav listeners
     document.querySelectorAll('.nav-link').forEach(link => {
         link.addEventListener('click', (e) => {
@@ -432,7 +587,11 @@ async function init() {
             loadPlainPage(link.dataset.page);
         });
     });
-    
+
+    // Language toggle listeners
+    document.getElementById('lang-toggle').addEventListener('click', toggleLanguage);
+    document.getElementById('lang-toggle-terminal').addEventListener('click', toggleLanguage);
+
     // Keep terminal input focused when in terminal view
     document.addEventListener('click', () => {
         if (currentView !== 'terminal') return;
@@ -444,28 +603,29 @@ async function init() {
 }
 
 function displayWelcomeMessage() {
+    const t = translations[currentLanguage];
     const welcome = `
 ╔═══════════════════════════════════════════════════════════════╗
-║            Welcome to Leo's Personal Website              ║
-║                      Terminal Interface                       ║
+║            ${t.welcomeTitle.padEnd(39)}║
+║                      ${t.welcomeSubtitle.padEnd(33)}║
 ╚═══════════════════════════════════════════════════════════════╝
 
-Type 'help' for available commands, or 'ls' to list files.
+${t.helpPrompt}
 
 `;
     addOutput(welcome, 'info');
-    
+
     // Add announcement
     const announcement = `
 ┌─────────────────────────────────────────────────────────────────┐
-│ 📢 UPDATE                                                       │
+│ ${t.updateTitle.padEnd(64)}│
 ├─────────────────────────────────────────────────────────────────┤
-│ If you are interested in being part of a serious game study     │
-│ hit me up via email                                             │
+│ ${t.updateText.split('\n')[0].padEnd(64)}│
+│ ${t.updateText.split('\n')[1].padEnd(64)}│
 └─────────────────────────────────────────────────────────────────┘
 `;
     addOutput(`<div class="terminal-announcement">${announcement}</div>`, 'info');
-    
+
     executeCommand('ls');
 }
 
@@ -473,15 +633,15 @@ function handleInput(e) {
     if (e.key === 'Enter') {
         e.preventDefault(); // Prevent the Enter key from bubbling up
         e.stopPropagation(); // Stop event propagation
-        
+
         const command = terminalInput.value.trim();
         if (command) {
-            addOutput(`abehou@stanford:${currentDirectory}$ ${command}`, 'command');
+            addOutput(`iPoe:~/personal_web$ ${command}`, 'command');
             commandHistory.push(command);
             historyIndex = commandHistory.length;
             executeCommand(command);
         } else {
-            addOutput(`abehou@stanford:${currentDirectory}$ `, 'command');
+            addOutput(`iPoe:~/personal_web$ `, 'command');
         }
         terminalInput.value = '';
     } else if (e.key === 'ArrowUp') {
@@ -539,15 +699,16 @@ function executeCommand(input) {
             addOutput(new Date().toString(), 'info');
             break;
         default:
-            addOutput(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
+            addOutput(`${translations[currentLanguage].commandNotFound}: ${command}. ${translations[currentLanguage].helpPrompt.split(',')[0]}.`, 'error');
     }
-    
+
     scrollToBottom();
 }
 
 function showHelp() {
+    const t = translations[currentLanguage];
     const help = `
-Available commands:
+${t.availableCommands}
 ───────────────────────────────────────────────────────────────
   ls [directory]       List files and directories
   cd <directory>       Change directory (main, publications, experiences, blog)
@@ -569,7 +730,7 @@ Examples:
   view blog            # Browse blog posts interactively
 
 Interactive Navigation:
-  When viewing publications/experiences/blog, use:
+  ${t.interactiveHelp}
     ↑/↓ or j/k         Navigate between items
     Enter              View selected item
     b                  Go back to list (from item view)
@@ -580,16 +741,17 @@ Interactive Navigation:
 }
 
 function listFiles(dir) {
+    const t = translations[currentLanguage];
     if (!dir) {
         // List root directory
         const output = `
-Available files and directories:
+${t.filesAndDirs}
   <span class="file">me</span>               About me and introduction
   <span class="directory">publications/</span>    My research publications
   <span class="directory">experiences/</span>     Professional and academic experience
   <span class="directory">blog/</span>            Blog posts and writings
 
-Type 'view <filename>' to open a file, or 'cd <directory>' to navigate.
+${t.helpFooter}
 
 Examples: 'view me' shows my introduction and contact information; 'view publications' shows my research publications.
 `;
@@ -598,14 +760,14 @@ Examples: 'view me' shows my introduction and contact information; 'view publica
         const dirName = dir.replace('/', '');
         if (content[dirName] && content[dirName].type === 'directory') {
             const files = Object.keys(content[dirName].files);
-            let output = `\nContents of ${dirName}/:\n`;
+            let output = `\n${t.contentsOf} ${dirName}/:\n`;
             files.forEach(file => {
                 output += `  <span class="file">${file}</span>\n`;
             });
             output += `\nType 'view ${dirName}' to see summary, or 'view <filename>' for details.\n`;
             addOutput(output, 'info');
         } else {
-            addOutput(`Directory not found: ${dir}`, 'error');
+            addOutput(`${t.dirNotFound}: ${dir}`, 'error');
         }
     }
 }
@@ -627,13 +789,13 @@ function changeDirectory(dir) {
             if (content[dirName].type === 'directory') {
                 currentDirectory = `~/${dirName}`;
                 updatePrompt();
-                addOutput(`Changed directory to ${dirName}`, 'success');
+                addOutput(`${translations[currentLanguage].changedDir} ${dirName}`, 'success');
                 listFiles(dirName);
             } else {
-                addOutput(`${dirName} is not a directory. Use 'view ${dirName}' to open it.`, 'error');
+                addOutput(`${dirName} ${translations[currentLanguage].isNotDir}`, 'error');
             }
         } else {
-            addOutput(`Directory not found: ${dir}`, 'error');
+            addOutput(`${translations[currentLanguage].dirNotFound}: ${dir}`, 'error');
         }
     }
 }
@@ -681,51 +843,52 @@ function viewFile(filename) {
         }
     }
 
-    addOutput(`File not found: ${filename}`, 'error');
+    addOutput(`${translations[currentLanguage].fileNotFound}: ${filename}`, 'error');
 }
 
 function formatFileContent(filename, file) {
+    const t = translations[currentLanguage];
     if (file.title) {
         // Publication or Experience format
         let content = `═══════════════════════════════════════════════════════════════\n`;
         content += `${file.title}\n`;
         content += `═══════════════════════════════════════════════════════════════\n\n`;
-        
+
         if (file.authors) {
-            content += `Authors: ${file.authors.replace(/<strong>/g, '').replace(/<\/strong>/g, '')}\n`;
+            content += `${t.authors} ${file.authors.replace(/<strong>/g, '').replace(/<\/strong>/g, '')}\n`;
         }
         if (file.venue) {
-            content += `Venue: ${file.venue}\n`;
+            content += `${t.venue} ${file.venue}\n`;
         }
         if (file.organization) {
-            content += `Organization: ${file.organization}\n`;
+            content += `${t.organization} ${file.organization}\n`;
         }
         if (file.duration) {
-            content += `Duration: ${file.duration}\n`;
+            content += `${t.duration} ${file.duration}\n`;
         }
         if (file.date) {
-            content += `Date: ${file.date}\n`;
+            content += `${t.date} ${file.date}\n`;
         }
-        
+
         content += `\n───────────────────────────────────────────────────────────────\n\n`;
-        
+
         if (file.abstract) {
-            content += `ABSTRACT\n\n${file.abstract}\n\n`;
+            content += `${t.abstract}\n\n${file.abstract}\n\n`;
         }
         if (file.description) {
-            content += `DESCRIPTION\n\n${file.description}\n\n`;
+            content += `${t.description}\n\n${file.description}\n\n`;
         }
         if (file.content) {
             content += `${file.content}\n\n`;
         }
         if (file.links) {
             content += `───────────────────────────────────────────────────────────────\n`;
-            content += `LINKS\n\n${file.links}\n`;
+            content += `${t.links}\n\n${file.links}\n`;
         }
-        
+
         return content;
     }
-    
+
     return JSON.stringify(file, null, 2);
 }
 
@@ -733,30 +896,31 @@ function openInteractiveList(dirName) {
     interactiveMode = true;
     interactiveType = dirName;
     selectedIndex = 0;
-    
+
     // Build list of items
     interactiveList = Object.entries(content[dirName].files);
-    
+
     // Update help text
-    document.querySelector('.vim-help').textContent = 'Use ↑↓ or j/k to navigate, Enter to select, q to quit';
-    
+    document.querySelector('.vim-help').textContent = translations[currentLanguage].interactiveHelp;
+
     // Remove focus from terminal input so vim viewer can receive keypresses
     terminalInput.blur();
-    
+
     // Display the interactive list
     displayInteractiveList();
 }
 
 function displayInteractiveList() {
     let displayContent = '';
-    
+    const t = translations[currentLanguage];
+
     if (interactiveType === 'publications') {
         displayContent = `═══════════════════════════════════════════════════════════════\n`;
-        displayContent += `                        PUBLICATIONS                           \n`;
+        displayContent += `                        ${t.publications.padEnd(31)}                       \n`;
         displayContent += `═══════════════════════════════════════════════════════════════\n\n`;
-        displayContent += `Use ↑/↓ or j/k to navigate, Enter to view, q to quit\n\n`;
+        displayContent += `${t.interactiveHelp}\n\n`;
         displayContent += `───────────────────────────────────────────────────────────────\n\n`;
-        
+
         interactiveList.forEach(([filename, fileData], index) => {
             const pointer = index === selectedIndex ? '→ ' : '  ';
             const highlight = index === selectedIndex ? '█ ' : '  ';
@@ -766,11 +930,11 @@ function displayInteractiveList() {
         });
     } else if (interactiveType === 'experiences') {
         displayContent = `═══════════════════════════════════════════════════════════════\n`;
-        displayContent += `                         EXPERIENCES                           \n`;
+        displayContent += `                         ${t.experiences.padEnd(30)}                       \n`;
         displayContent += `═══════════════════════════════════════════════════════════════\n\n`;
-        displayContent += `Use ↑/↓ or j/k to navigate, Enter to view, q to quit\n\n`;
+        displayContent += `${t.interactiveHelp}\n\n`;
         displayContent += `───────────────────────────────────────────────────────────────\n\n`;
-        
+
         interactiveList.forEach(([filename, fileData], index) => {
             const pointer = index === selectedIndex ? '→ ' : '  ';
             displayContent += `${pointer}${fileData.title}\n`;
@@ -778,23 +942,23 @@ function displayInteractiveList() {
         });
     } else if (interactiveType === 'blog') {
         displayContent = `═══════════════════════════════════════════════════════════════\n`;
-        displayContent += `                            BLOG                               \n`;
+        displayContent += `                            ${t.blog.padEnd(27)}                               \n`;
         displayContent += `═══════════════════════════════════════════════════════════════\n\n`;
-        displayContent += `Use ↑/↓ or j/k to navigate, Enter to view, q to quit\n\n`;
+        displayContent += `${t.interactiveHelp}\n\n`;
         displayContent += `───────────────────────────────────────────────────────────────\n\n`;
-        
+
         interactiveList.forEach(([filename, fileData], index) => {
             const pointer = index === selectedIndex ? '→ ' : '  ';
             displayContent += `${pointer}${fileData.title}\n`;
             displayContent += `   ${fileData.date}\n\n`;
         });
     }
-    
+
     vimViewer.classList.remove('hidden');
     vimViewer.dataset.fromList = 'false'; // Reset the flag
     document.querySelector('.vim-filename').textContent = interactiveType;
     vimContent.textContent = displayContent;
-    
+
     // Scroll to selected item
     scrollToSelectedItem();
     updateVimStatus();
@@ -812,29 +976,30 @@ function openVimViewer(filename, content) {
     const preservedType = interactiveType;
     const preservedList = [...interactiveList];
     const preservedIndex = selectedIndex;
-    
+
     interactiveMode = false;
-    
+
     // Remove focus from terminal input so vim viewer can receive keypresses
     terminalInput.blur();
-    
+
     vimViewer.classList.remove('hidden');
     document.querySelector('.vim-filename').textContent = filename;
     vimContent.textContent = content; // Use textContent for proper wrapping
     vimContent.scrollTop = 0;
-    
+
     // Update help text - add back option if came from list
+    const t = translations[currentLanguage];
     if (wasInteractive && preservedList.length > 0) {
-        document.querySelector('.vim-help').textContent = 'Press b to go back, q to quit, ↑↓ or j/k to scroll';
+        document.querySelector('.vim-help').textContent = t.pressB;
         // Store the list info so we can go back
         vimViewer.dataset.fromList = 'true';
         vimViewer.dataset.listType = preservedType;
         vimViewer.dataset.listIndex = preservedIndex;
     } else {
-        document.querySelector('.vim-help').textContent = 'Press q to quit, ↑↓ or j/k to scroll';
+        document.querySelector('.vim-help').textContent = t.pressQ;
         vimViewer.dataset.fromList = 'false';
     }
-    
+
     updateVimStatus();
 }
 
@@ -857,13 +1022,13 @@ function handleVimKeypress(e) {
         e.preventDefault();
         const listType = vimViewer.dataset.listType;
         const listIndex = parseInt(vimViewer.dataset.listIndex) || 0;
-        
+
         interactiveMode = true;
         interactiveType = listType;
         selectedIndex = listIndex;
         interactiveList = Object.entries(content[listType].files);
-        
-        document.querySelector('.vim-help').textContent = 'Use ↑↓ or j/k to navigate, Enter to select, q to quit';
+
+        document.querySelector('.vim-help').textContent = translations[currentLanguage].interactiveHelp;
         displayInteractiveList();
     } else if (interactiveMode) {
         // Interactive list navigation
@@ -947,14 +1112,14 @@ function scrollToBottom() {
 function updatePrompt() {
     const prompts = document.querySelectorAll('.prompt');
     prompts.forEach(prompt => {
-        prompt.textContent = `abehou@stanford:${currentDirectory}$ `;
+        prompt.textContent = `iPoe:${currentDirectory}$ `;
     });
 }
 
 function autocomplete() {
     const input = terminalInput.value.trim();
     const parts = input.split(/\s+/);
-    
+
     if (parts.length === 1) {
         // Complete command
         const commands = ['help', 'ls', 'cd', 'view', 'clear', 'pwd', 'cat', 'whoami', 'date'];

@@ -1,0 +1,36 @@
+{
+    "type": "directory",
+    "description": "Mis experiencias profesionales y académicas enfocadas en Ingeniería de Datos",
+    "files": {
+        "position1.txt": {
+            "title": "Fundador e Ingeniero de Datos Principal",
+            "organization": "Contactall",
+            "duration": "2024 - Presente",
+            "description": "Arquitecto de soluciones de software impulsadas por datos para cooperativas y restaurantes. Diseñé pipelines de datos escalables utilizando PySpark y Hadoop para manejar la ingestión y procesamiento de datos de alto volumen, optimizando el rendimiento del backend para conjuntos de datos transaccionales complejos."
+        },
+        "research_project.txt": {
+            "title": "Colaborador de Investigación (Interacción Humano-IA)",
+            "organization": "Stanford University (Estudio Remoto)",
+            "duration": "Dic 2025 - Presente",
+            "description": "Colaboré con Abe en el Estudio de Colaboración Humano-IA de Stanford. Participé en un estudio de investigación sobre cómo los desarrolladores experimentados de BattleSnake colaboran con herramientas de IA al construir bots competitivos en Python para torneos de duelo. El propósito es avanzar en la comprensión de la interacción humano-IA en la codificación creativa."
+        },
+        "position2.txt": {
+            "title": "Asistente de Investigación y Desarrollador de Datos",
+            "organization": "Pontificia Universidad Javeriana Cali",
+            "duration": "Ene 2024 - Presente",
+            "description": "Desarrollé una arquitectura full-stack para la automatización de la atención médica usando Python. Diseñé pipelines de datos para analizar canales de comunicación, alcanzando exitosamente más de 800 usuarios. Diseñé módulos robustos de procesamiento de datos backend para mejorar la entrega de servicios."
+        },
+        "position3.txt": {
+            "title": "Ingeniero Full Stack (Enfoque en Datos)",
+            "organization": "Qubika",
+            "duration": "Feb 2023 - Ene 2024",
+            "description": "Diseñé e implementé APIs GraphQL, modelando efectivamente esquemas de datos para un acceso eficiente. Construí bases de código escalables en entornos Dockerizados para clientes internacionales y colaboré en la integración de tecnología en flujos de trabajo de atención al paciente."
+        },
+        "education1.txt": {
+            "title": "Ingeniería de Sistemas",
+            "organization": "Pontificia Universidad Javeriana Cali",
+            "duration": "Julio 2021 - 2026",
+            "description": "Honores: Matrícula de Honor en Programación. Completé cursos especializados en Big Data y Analítica, enfocándome en ecosistemas Hadoop, arquitecturas de procesamiento de datos y manejo de datos a gran escala."
+        }
+    }
+}

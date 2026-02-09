@@ -1,0 +1,13 @@
+{
+    "type": "directory",
+    "description": "Mis publicaciones de investigación",
+    "files": {
+        "(PUJCALI 2026) Développement d'un prototype numérique gamifié du jeu Conversex pour renforcer l'éducation sexuelle intégrale chez les adolescents": {
+            "title": "Développement d'un prototype numérique gamifié du jeu Conversex pour renforcer l'éducation sexuelle intégrale chez les adolescents",
+            "authors": "Leonardo Saez Wilches, David Baldeon, Andres Navarro",
+            "venue": "Lorem ipsum",
+            "links": "[Paper] inser_link| [Code] insert_link",
+            "abstract": "Lorem ipsum"
+        }
+    }
+}

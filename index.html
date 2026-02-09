@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="apple-touch-icon" sizes="180x180" href="stf_logo_white.png">
     <link rel="stylesheet" href="terminal.css">
 </head>
+
 <body>
     <!-- Terminal View -->
     <div class="terminal-container" id="terminal-view">
@@ -20,6 +22,10 @@
             <div class="terminal-title">iPoe: ~/personal_web</div>
             <!-- View Toggle Controls for Terminal -->
             <div class="view-controls terminal-controls">
+                <button id="lang-toggle-terminal" class="control-btn" title="Toggle English/Spanish">
+                    <span class="icon">🇪🇸</span>
+                    <span class="label">ES</span>
+                </button>
                 <button id="theme-toggle-terminal" class="control-btn" title="Toggle Light/Dark Mode">
                     <span class="icon">☀️</span>
                     <span class="label">Light</span>
@@ -33,7 +39,7 @@
         <div class="terminal-body">
             <div id="terminal-output"></div>
             <div class="input-line">
-                <span class="prompt">abehou@stanford:~/personal_web$ </span>
+                <span class="prompt">iPoe:~/personal_web$ </span>
                 <input type="text" id="terminal-input" autocomplete="off" spellcheck="false" autofocus>
             </div>
         </div>
@@ -47,6 +53,10 @@
                     <h1 class="name">Leo SW</h1>
                     <!-- View Toggle Controls -->
                     <div class="view-controls">
+                        <button id="lang-toggle" class="control-btn" title="Toggle English/Spanish">
+                            <span class="icon">🇪🇸</span>
+                            <span class="label">ES</span>
+                        </button>
                         <button id="theme-toggle" class="control-btn" title="Toggle Light/Dark Mode">
                             <span class="icon">☀️</span>
                             <span class="label">Light</span>
@@ -90,4 +100,5 @@
 
     <script src="terminal.js"></script>
 </body>
+
 </html>
