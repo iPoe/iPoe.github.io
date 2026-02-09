@@ -1,54 +1,30 @@
 {
   "type": "directory",
-  "description": "My professional and academic experiences",
+  "description": "My professional and academic experiences tailored for Data Engineering",
   "files": {
-    "education1.txt": {
-      "title": "B.S. Computer Science",
-      "organization": "Pontificia Universidad Javeriana Cali",
-      "duration": "2021 - 2026",
-      "description": "Mainly worked with Professors Juan Pablo Garcia Cifuentes, Paula Cristina, and Navarro Wolf & David Baldeon"
-    },
-    "activity1.txt": {
-      "title": "Club Co-Founder & President",
-      "organization": "Technology and Policy Society at Johns Hopkins University",
-      "duration": "July 2022 - May 2025",
-      "description": "Organized 5+ AI policy seminars and hosted the inaugural AI policy hackathon in Washington, D.C. with $25K from OpenAI and Microsoft."    
-    },
-    "activity2.txt": {
-      "title": "Director of Programming",
-      "organization": "Johns Hopkins Undergraduate Law Review",
-      "duration": "Sep 2021 - Sep 2024",
-      "description": "Organized AI & Law and interdisplinary law seminars and edited a few law review articles."    
-    },
     "position1.txt": {
-      "title": "Research Intern",
-      "organization": "JHU CSSE (System Engineering)",
-      "duration": "Sep 2024 - May 2025",
-      "description": "Worked with Professor Lauren Gardner and Hongru Du on vaccine hesitancy simulation."    
+      "title": "Founder & Lead Data Engineer",
+      "organization": "Contactall",
+      "duration": "2024 - Present",
+      "description": "Architected data-driven software solutions for cooperatives and restaurants. Designed scalable data pipelines using PySpark and Hadoop to handle high-volume data ingestion and processing, optimizing backend performance for complex transactional datasets."
     },
     "position2.txt": {
-      "title": "Research Intern",
-      "organization": "JHU CLSP",
-      "duration": "May 2023 - May 2025",
-      "description": "Worked with Professor Ben Van Durme on legal case retrieval and retrieval-augmented generation."
+      "title": "Research Assistant & Data Developer",
+      "organization": "Pontificia Universidad Javeriana Cali",
+      "duration": "Jan 2024 - Present",
+      "description": "Developed full-stack architecture for healthcare automation using Python[cite: 10]. [cite_start]Engineered data pipelines to analyze communication channels, successfully reaching 800+ users[cite: 11]. [cite_start]Designed robust backend data processing modules to enhance service delivery[cite: 12]."
     },
     "position3.txt": {
-      "title": "Research Intern",
-      "organization": "University of Washington",
-      "duration": "Feb 2023 - Sep 2023",
-      "description": "Worked with Professor Yulia Tsvetkov and Tianxing He on semantic watermarking for LLMs."
+      "title": "Full Stack Engineer (Data Focus)",
+      "organization": "Qubika",
+      "duration": "Feb 2023 - Jan 2024",
+      "description": "Designed and implemented GraphQL APIs, effectively modeling data schemas for efficient access[cite: 18]. [cite_start]Built scalable codebases in Dockerized environments for international clients [cite: 17] [cite_start]and collaborated on integrating technology into patient care workflows[cite: 14]."
     },
-    "position4.txt": {
-      "title": "Software Engineering Intern",
-      "organization": "Qualytics",
-      "duration": "May 2022 - Aug 2022",
-      "description": "Worked on integrating data pipelines for Qualytics' software with OpenMetadata."    
-    },
-    "position5.txt": {
-      "title": "Legal Intern",
-      "organization": "Tianyuan Law Firm",
-      "duration": "May 2021 - Aug 2021",
-      "description": "Conducted legal research on data protection laws and served clients for IPO filings and pre-IPO compliance."    
+    "education1.txt": {
+      "title": "B.S. Computer Science (Ingeniería de Sistemas)",
+      "organization": "Pontificia Universidad Javeriana Cali",
+      "duration": "July 2021 - 2026",
+      "description": "Honors: Matrícula de Honor in Programming[cite: 24]. Completed specialized coursework in Big Data & Analytics, focusing on Hadoop ecosystems, data processing architectures, and large-scale data handling."
     }
   }
 }
