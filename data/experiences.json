@@ -8,23 +8,29 @@
       "duration": "2024 - Present",
       "description": "Architected data-driven software solutions for cooperatives and restaurants. Designed scalable data pipelines using PySpark and Hadoop to handle high-volume data ingestion and processing, optimizing backend performance for complex transactional datasets."
     },
+    "research_project.txt": {
+      "title": "Research Collaborator (Human-AI Interaction)",
+      "organization": "Stanford University (Remote Study)",
+      "duration": "Dec 2025 - Present",
+      "description": "Collaborated with Abe on the Stanford Human-AI Collaboration Study. participate in a research study on how experienced BattleSnake developers collaborate with AI tools when building competitive Python bots for Duel Tournaments. The purpose is to advance the understanding of human–AI interaction in creative coding."
+    },
     "position2.txt": {
       "title": "Research Assistant & Data Developer",
       "organization": "Pontificia Universidad Javeriana Cali",
       "duration": "Jan 2024 - Present",
-      "description": "Developed full-stack architecture for healthcare automation using Python[cite: 10]. [cite_start]Engineered data pipelines to analyze communication channels, successfully reaching 800+ users[cite: 11]. [cite_start]Designed robust backend data processing modules to enhance service delivery[cite: 12]."
+      "description": "Developed full-stack architecture for healthcare automation using Python. Engineered data pipelines to analyze communication channels, successfully reaching 800+ users. Designed robust backend data processing modules to enhance service delivery."
     },
     "position3.txt": {
       "title": "Full Stack Engineer (Data Focus)",
       "organization": "Qubika",
       "duration": "Feb 2023 - Jan 2024",
-      "description": "Designed and implemented GraphQL APIs, effectively modeling data schemas for efficient access[cite: 18]. [cite_start]Built scalable codebases in Dockerized environments for international clients [cite: 17] [cite_start]and collaborated on integrating technology into patient care workflows[cite: 14]."
+      "description": "Designed and implemented GraphQL APIs, effectively modeling data schemas for efficient access. Built scalable codebases in Dockerized environments for international clients and collaborated on integrating technology into patient care workflows."
     },
     "education1.txt": {
       "title": "B.S. Computer Science (Ingeniería de Sistemas)",
       "organization": "Pontificia Universidad Javeriana Cali",
       "duration": "July 2021 - 2026",
-      "description": "Honors: Matrícula de Honor in Programming[cite: 24]. Completed specialized coursework in Big Data & Analytics, focusing on Hadoop ecosystems, data processing architectures, and large-scale data handling."
+      "description": "Honors: Matrícula de Honor in Programming. Completed specialized coursework in Big Data & Analytics, focusing on Hadoop ecosystems, data processing architectures, and large-scale data handling."
     }
   }
 }
