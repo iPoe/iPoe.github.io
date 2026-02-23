@@ -24,7 +24,7 @@ let currentPlainPage = 'me'; // current page in plain view
 
 const translations = {
     en: {
-        welcomeTitle: "Welcome to Leo's Personal Website",
+        welcomeTitle: "Welcome to Leonardo's Personal Website",
         welcomeSubtitle: "Terminal Interface",
         helpPrompt: "Type 'help' for available commands, or 'ls' to list files.",
         updateTitle: "📢 UPDATE",
@@ -446,18 +446,12 @@ function renderPlainMain() {
     `;
 
     for (const line of lines) {
-        // Skip all separator lines (===, ---, ╔, ╚, ║, etc.)
-        if (line.includes('═') || line.includes('─') ||
-            line.includes('╔') || line.includes('╚') || line.includes('║')) {
-            continue;
-        }
-
-        if (line.trim().startsWith('ABE HOU')) {
+        if (line.trim().startsWith('LEONARDO SAEZ')) {
             continue;
         } else if (line.includes('CONTACT & SOCIAL') || line.includes('CONTACTO Y REDES SOCIALES')) {
             html += `<h3>${t.contactAndSocial}</h3>`;
-        } else if (line.includes('http')) {
-            // Convert URLs to links
+        } else if (line.includes('http') && !line.includes('<a href=')) {
+            // Convert URLs to links if they aren't already links
             const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
             if (urlMatch) {
                 const url = urlMatch[1];
@@ -465,7 +459,15 @@ function renderPlainMain() {
                 html += `<p><strong>${label}:</strong> <a href="${url}" target="_blank">${url}</a></p>`;
             }
         } else if (line.trim()) {
-            html += `<p>${line.trim()}</p>`;
+            // Check if it's a separator line
+            if (line.includes('═') || line.includes('─') ||
+                line.includes('╔') || line.includes('╚') || line.includes('║')) {
+                html += `<div class="separator-line">${line}</div>`;
+            } else {
+                html += `<p>${line.trim()}</p>`;
+            }
+        } else if (line === '') {
+            html += `<br>`;
         }
     }
 
@@ -693,7 +695,7 @@ function executeCommand(input) {
             viewFile(args.join(' '));
             break;
         case 'whoami':
-            addOutput('abehou', 'info');
+            addOutput('iPoe', 'info');
             break;
         case 'date':
             addOutput(new Date().toString(), 'info');
@@ -984,7 +986,7 @@ function openVimViewer(filename, content) {
 
     vimViewer.classList.remove('hidden');
     document.querySelector('.vim-filename').textContent = filename;
-    vimContent.textContent = content; // Use textContent for proper wrapping
+    vimContent.innerHTML = content; // Use innerHTML to render HTML from me.json
     vimContent.scrollTop = 0;
 
     // Update help text - add back option if came from list

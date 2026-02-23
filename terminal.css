@@ -751,6 +751,15 @@ body.light-mode .terminal-announcement {
     background: rgba(121, 94, 38, 0.1);
 }
 
+.separator-line {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+    white-space: pre;
+    color: var(--web-text-secondary);
+    margin: 5px 0;
+    font-size: 0.85rem;
+    overflow-x: auto;
+}
+
 /* Mobile Responsive for Plain View */
 @media (max-width: 768px) {
     .plain-container {
