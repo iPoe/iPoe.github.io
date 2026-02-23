@@ -1,1 +1,12 @@
 *.bak
+#Knowledge
+SKILL.md
+walkthrough.md.resolved
+session_journal.md.resolved
+# Stack Overflow context files
+javascript - Uncaught TypeError_ Cannot read property 'querySelector' of null - Stack Overflow.html
+javascript - Uncaught TypeError_ Cannot read property 'querySelector' of null - Stack Overflow_files/
+
+#Images
+blog.png
+experience.png

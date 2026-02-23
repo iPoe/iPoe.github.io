@@ -1,4 +1,36 @@
 {
   "type": "file",
-  "content": "\n═══════════════════════════════════════════════════════════════\n                                                         \n═══════════════════════════════════════════════════════════════\n\n¡Hola! Soy Leonardo Saez Wilches.\n\nSoy Ingeniero de Datos/Games Developer y estudiante de último año de Ingeniería de Sistemas en la Pontificia Universidad Javeriana Cali, especializándome en arquitecturas de Big Data.\n\nMe apasiona diseñar Pipelines de Datos escalables, procesar grandes conjuntos de datos con PySpark y Hadoop, y el Almacenamiento de Datos en la Nube (Snowflake/AWS).\n\nActualmente estoy impulsando la innovación de datos como Fundador e Ingeniero de Datos Principal en Contactall.\n\n───────────────────────────────────────────────────────────────\nCONTACTO Y REDES SOCIALES\n───────────────────────────────────────────────────────────────\nEmail: <a href='mailto:leonardosawi12@gmail.com'>leonardosawi12@gmail.com</a> \n───────────────────────────────────────────────────────────────\n"
+  "name": "LEONARDO SAEZ WILCHES",
+  "title": "DATA ENGINEER / GAME DEV",
+  "bio": "Fundador y Lead Data Engineer en Contactall. Estudiante de último año de Ingeniería de Sistemas en la Pontificia Universidad Javeriana Cali. Especializado en arquitecturas de datos de alto rendimiento y diseño de sistemas interactivos.",
+  "blueprint": [
+    {
+      "category": "STACK_TÉCNICO",
+      "items": [
+        "PIPELINES_ESCALABLES",
+        "PYSPARK / HADOOP",
+        "SNOWFLAKE / AWS"
+      ]
+    },
+    {
+      "category": "INTERACTIVO",
+      "items": [
+        "DEV_MOTORES_DE_JUEGO",
+        "INNOVACIÓN_DE_SOFTWARE"
+      ]
+    },
+    {
+      "category": "CAPA_HUMANA",
+      "items": [
+        "LENGUAJE_DE_SEÑAS",
+        "ARTES_DRAMÁTICAS"
+      ]
+    }
+  ],
+  "contact": {
+    "node": "COMM_PROTOCOL",
+    "email": "leonardosawi12@gmail.com",
+    "github": "https://github.com/iPoe"
+  },
+  "content": "\n═══════════════════════════════════════════════════════════════\n   🚀 LEONARDO SAEZ WILCHES | Data Engineer & Game Dev\n═══════════════════════════════════════════════════════════════\n\nI am the Founder & Lead Data Engineer at Contactall and a final-year \nComputer Science student at Pontificia Universidad Javeriana Cali.\n\n─── TECHNICAL FOCUS ───────────────────────────────────────────\n\n• BIG DATA: Scalable Pipelines, PySpark, Hadoop & Snowflake.\n• CLOUD: Architecting robust solutions on AWS.\n• INTERACTIVE: Game Development & Software Innovation.\n\n─── BEYOND THE TERMINAL ───────────────────────────────────────\n\n• COMMUNICATION: Studying Sign Language & Dramatic Arts.\n• RITUALS: Reading novels, cycling, and discovering music.\n\n───────────────────────────────────────────────────────────────\nCONTACT & SOCIAL\n───────────────────────────────────────────────────────────────\nEmail: <a href='mailto:leonardosawi12@gmail.com'>leonardosawi12@gmail.com</a> \n───────────────────────────────────────────────────────────────\n"
 }

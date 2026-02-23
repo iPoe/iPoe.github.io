@@ -140,12 +140,7 @@ function initializeView() {
     }
     if (currentTheme === 'light') {
         document.body.classList.add('light-mode');
-        const themeBtn = document.getElementById('theme-toggle');
-        themeBtn.querySelector('.icon').textContent = '🌙';
-        themeBtn.querySelector('.label').textContent = 'Dark';
-        const themeBtnTerminal = document.getElementById('theme-toggle-terminal');
-        themeBtnTerminal.querySelector('.icon').textContent = '🌙';
-        themeBtnTerminal.querySelector('.label').textContent = 'Dark';
+        updateThemeToggleIcon();
     }
 
     // Set view - default to plain (web) view unless user has saved preference for terminal
@@ -169,29 +164,34 @@ function toggleTheme() {
     currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     document.body.classList.toggle('light-mode');
 
-    // Update plain view button
-    const themeBtn = document.getElementById('theme-toggle');
-    const themeIcon = themeBtn.querySelector('.icon');
-    const themeLabel = themeBtn.querySelector('.label');
-
-    // Update terminal view button
-    const themeBtnTerminal = document.getElementById('theme-toggle-terminal');
-    const themeIconTerminal = themeBtnTerminal.querySelector('.icon');
-    const themeLabelTerminal = themeBtnTerminal.querySelector('.label');
-
-    if (currentTheme === 'dark') {
-        themeIcon.textContent = '☀️';
-        themeLabel.textContent = 'Light';
-        themeIconTerminal.textContent = '☀️';
-        themeLabelTerminal.textContent = 'Light';
-    } else {
-        themeIcon.textContent = '🌙';
-        themeLabel.textContent = 'Dark';
-        themeIconTerminal.textContent = '🌙';
-        themeLabelTerminal.textContent = 'Dark';
-    }
+    updateThemeToggleIcon();
 
     localStorage.setItem('preferredTheme', currentTheme);
+}
+
+function updateThemeToggleIcon() {
+    const themeBtn = document.getElementById('theme-toggle');
+    const themeBtnTerminal = document.getElementById('theme-toggle-terminal');
+
+    if (currentTheme === 'dark') {
+        if (themeBtn) {
+            themeBtn.querySelector('.icon').textContent = '☀️';
+            themeBtn.querySelector('.label').textContent = 'Light';
+        }
+        if (themeBtnTerminal) {
+            themeBtnTerminal.querySelector('.icon').textContent = '☀️';
+            themeBtnTerminal.querySelector('.label').textContent = 'Light';
+        }
+    } else {
+        if (themeBtn) {
+            themeBtn.querySelector('.icon').textContent = '🌙';
+            themeBtn.querySelector('.label').textContent = 'Dark';
+        }
+        if (themeBtnTerminal) {
+            themeBtnTerminal.querySelector('.icon').textContent = '🌙';
+            themeBtnTerminal.querySelector('.label').textContent = 'Dark';
+        }
+    }
 }
 
 // Toggle view
@@ -211,24 +211,27 @@ function toggleView() {
 function updateViewToggleIcon() {
     // Update plain view button
     const viewBtn = document.getElementById('view-toggle');
-    const viewIcon = viewBtn.querySelector('.icon');
-    const viewLabel = viewBtn.querySelector('.label');
-
     // Update terminal view button
     const viewBtnTerminal = document.getElementById('view-toggle-terminal');
-    const viewIconTerminal = viewBtnTerminal.querySelector('.icon');
-    const viewLabelTerminal = viewBtnTerminal.querySelector('.label');
 
     if (currentView === 'terminal') {
-        viewIcon.textContent = '📄';
-        viewLabel.textContent = 'Web';
-        viewIconTerminal.textContent = '📄';
-        viewLabelTerminal.textContent = 'Web';
+        if (viewBtn) {
+            viewBtn.querySelector('.icon').textContent = '📄';
+            viewBtn.querySelector('.label').textContent = 'Web';
+        }
+        if (viewBtnTerminal) {
+            viewBtnTerminal.querySelector('.icon').textContent = '📄';
+            viewBtnTerminal.querySelector('.label').textContent = 'Web';
+        }
     } else {
-        viewIcon.textContent = '💻';
-        viewLabel.textContent = 'Terminal';
-        viewIconTerminal.textContent = '💻';
-        viewLabelTerminal.textContent = 'Terminal';
+        if (viewBtn) {
+            viewBtn.querySelector('.icon').textContent = '💻';
+            viewBtn.querySelector('.label').textContent = 'Terminal';
+        }
+        if (viewBtnTerminal) {
+            viewBtnTerminal.querySelector('.icon').textContent = '💻';
+            viewBtnTerminal.querySelector('.label').textContent = 'Terminal';
+        }
     }
 }
 
@@ -408,139 +411,181 @@ ${t.recentPosts}
 function loadPlainPage(page) {
     currentPlainPage = page;
 
-    // Update active nav link
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.page === page) {
-            link.classList.add('active');
-        }
-    });
-
-    // Render content
+    // Render the specific content first
+    let contentHtml = '';
     if (page === 'me') {
-        renderPlainMain();
+        contentHtml = getPlainMainContent();
     } else if (page === 'publications') {
-        renderPlainPublications();
+        contentHtml = getPlainPublicationsContent();
     } else if (page === 'experiences') {
-        renderPlainExperiences();
+        contentHtml = getPlainExperiencesContent();
     } else if (page === 'blog') {
-        renderPlainBlog();
+        contentHtml = getPlainBlogContent();
     }
+
+    // Now wrap it in the industrial layout
+    renderPlainLayout(contentHtml);
 }
 
-function renderPlainMain() {
+function renderPlainLayout(contentHtml) {
     const meData = content.me;
+    const t = translations[currentLanguage];
+    const plainView = document.getElementById('plain-view');
+
     if (!meData) return;
 
-    // Convert terminal content to HTML
-    const lines = meData.content.split('\n');
-    let html = '<div class="main-content">';
+    let html = `
+        <div class="blueprint-container">
+            <div class="blueprint-grid">
+                <div class="blueprint-masthead">
+                    <div class="view-controls">
+                        <button id="lang-toggle" class="control-btn" title="Toggle English/Spanish">
+                            <span class="icon">${currentLanguage === 'en' ? '🇪🇸' : '🇺🇸'}</span>
+                            <span class="label">${currentLanguage === 'en' ? 'ES' : 'EN'}</span>
+                        </button>
+                        <button id="theme-toggle" class="control-btn" title="Toggle Light/Dark Mode">
+                            <span class="icon">${currentTheme === 'dark' ? '☀️' : '🌙'}</span>
+                            <span class="label">${currentTheme === 'dark' ? 'Light' : 'Dark'}</span>
+                        </button>
+                        <button id="view-toggle" class="control-btn" title="Toggle Terminal/Plain View">
+                            <span class="icon">🖥️</span>
+                            <span class="label">Terminal</span>
+                        </button>
+                    </div>
+                    
+                    <nav class="plain-nav">
+                        <a href="#" data-page="me" class="nav-link ${currentPlainPage === 'me' ? 'active' : ''}">${t.home}</a>
+                        <a href="#" data-page="publications" class="nav-link ${currentPlainPage === 'publications' ? 'active' : ''}">${t.publications.charAt(0) + t.publications.slice(1).toLowerCase()}</a>
+                        <a href="#" data-page="experiences" class="nav-link ${currentPlainPage === 'experiences' ? 'active' : ''}">${currentLanguage === 'es' ? 'Experiencia' : 'Experience'}</a>
+                        <a href="#" data-page="blog" class="nav-link ${currentPlainPage === 'blog' ? 'active' : ''}">${t.blog.charAt(0) + t.blog.slice(1).toLowerCase()}</a>
+                    </nav>
 
-    // Add announcement box
+                    <div class="blueprint-label">IDENTITY_CORE</div>
+                    <h1 class="name">${meData.name}</h1>
+                    <div class="blueprint-title">${meData.title}</div>
+                    ${currentPlainPage === 'me' ? `<div class="blueprint-bio">${meData.bio}</div>` : ''}
+                </div>
+
+                <div class="blueprint-content">
+                    ${contentHtml}
+                </div>
+            </div>
+
+            <div class="blueprint-footer">
+                <div class="contact-node">
+                    <div class="blueprint-label">CONTACT_PTR</div>
+                    <a href="mailto:${meData.contact.email}">${meData.contact.email}</a>
+                </div>
+                <div class="social-links">
+                    <a href="${meData.contact.github}" target="_blank">GITHUB_REPOSITORY</a>
+                </div>
+            </div>
+        </div>
+    `;
+
+    plainView.innerHTML = html;
+    setupPlainViewEventListeners();
+}
+
+function getPlainMainContent() {
+    const meData = content.me;
     const t = translations[currentLanguage];
-    html += `
+    if (!meData) return '';
+
+    let html = `
         <div class="announcement">
             <div class="announcement-title">${t.updateTitlePlain}</div>
             <p>${t.updateText.replace('\n', ' ')}</p>
         </div>
     `;
 
-    for (const line of lines) {
-        if (line.trim().startsWith('LEONARDO SAEZ')) {
-            continue;
-        } else if (line.includes('CONTACT & SOCIAL') || line.includes('CONTACTO Y REDES SOCIALES')) {
-            html += `<h3>${t.contactAndSocial}</h3>`;
-        } else if (line.includes('http') && !line.includes('<a href=')) {
-            // Convert URLs to links if they aren't already links
-            const urlMatch = line.match(/(https?:\/\/[^\s]+)/);
-            if (urlMatch) {
-                const url = urlMatch[1];
-                const label = line.split(':')[0].trim() || t.link;
-                html += `<p><strong>${label}:</strong> <a href="${url}" target="_blank">${url}</a></p>`;
-            }
-        } else if (line.trim()) {
-            // Check if it's a separator line
-            if (line.includes('═') || line.includes('─') ||
-                line.includes('╔') || line.includes('╚') || line.includes('║')) {
-                html += `<div class="separator-line">${line}</div>`;
-            } else {
-                html += `<p>${line.trim()}</p>`;
-            }
-        } else if (line === '') {
-            html += `<br>`;
-        }
+    if (meData.blueprint) {
+        meData.blueprint.forEach(section => {
+            html += `
+                <div class="blueprint-section">
+                    <div class="section-tag">[${section.category}]</div>
+                    <div class="blueprint-items">
+            `;
+            section.items.forEach(item => {
+                html += `<div class="blueprint-item">${item}</div>`;
+            });
+            html += `</div></div>`;
+        });
+    } else {
+        html += `<div class="main-content">${meData.content.split('\n').map(l => l.trim() ? `<p>${l}</p>` : '').join('')}</div>`;
     }
-
-    html += '</div>';
-    plainContent.innerHTML = html;
+    return html;
 }
 
-function renderPlainPublications() {
+function setupPlainViewEventListeners() {
+    const langBtn = document.getElementById('lang-toggle');
+    const themeBtn = document.getElementById('theme-toggle');
+    const viewBtn = document.getElementById('view-toggle');
+
+    if (langBtn) langBtn.addEventListener('click', toggleLanguage);
+    if (themeBtn) themeBtn.addEventListener('click', toggleTheme);
+    if (viewBtn) viewBtn.addEventListener('click', toggleView);
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const page = e.currentTarget.dataset.page;
+            loadPlainPage(page);
+        });
+    });
+}
+
+function getPlainPublicationsContent() {
     const pubs = content.publications;
-    if (!pubs || !pubs.files) return;
+    if (!pubs || !pubs.files) return '';
 
-    let html = '<h2>Publications</h2>';
-
+    let html = `<div class="blueprint-section"><div class="section-tag">[SELECTED_PUBLICATIONS]</div><div class="blueprint-items">`;
     Object.entries(pubs.files).forEach(([filename, pub]) => {
         html += `
-            <div class="item">
-                <div class="item-title">${pub.title}</div>
-                <div class="item-meta">${pub.authors.replace(/<strong>/g, '<strong>').replace(/<\/strong>/g, '</strong>')}</div>
-                <div class="item-meta"><em>${pub.venue}</em></div>
-                <div class="item-meta">${pub.abstract}</div>
-                <div class="item-links">
-                    ${pub.links.split('|').map(link => {
-            const match = link.trim().match(/\[(.*?)\]\s*(.*)/);
-            if (match) {
-                const [, text, url] = match;
-                return url.trim() === '#' ? `<span style="color: #888;">[${text}]</span>` : `<a href="${url.trim()}" target="_blank">[${text}]</a>`;
-            }
-            return '';
-        }).join(' ')}
-                </div>
+            <div class="blueprint-item">
+                <div style="font-size: 1.25rem;">${pub.title}</div>
+                <div style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--industrial-muted);">${pub.venue}</div>
             </div>
         `;
     });
-
-    plainContent.innerHTML = html;
+    html += `</div></div>`;
+    return html;
 }
 
-function renderPlainExperiences() {
+function getPlainExperiencesContent() {
     const exps = content.experiences;
-    if (!exps || !exps.files) return;
+    if (!exps || !exps.files) return '';
 
-    let html = '<h2>Experience</h2>';
-
+    let html = `<div class="blueprint-section"><div class="section-tag">[PROFESSIONAL_JOURNEY]</div><div class="blueprint-items">`;
     Object.entries(exps.files).forEach(([filename, exp]) => {
         html += `
-            <div class="item">
-                <div class="item-title">${exp.title}</div>
-                <div class="item-meta"><strong>${exp.organization}</strong> | ${exp.duration}</div>
-                <div class="item-meta">${exp.description}</div>
+            <div class="blueprint-item">
+                <div style="font-size: 1.25rem;">${exp.title}</div>
+                <div style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--industrial-muted);">${exp.organization} | ${exp.duration}</div>
+                <div class="blueprint-item-description">${exp.description}</div>
             </div>
         `;
     });
-
-    plainContent.innerHTML = html;
+    html += `</div></div>`;
+    return html;
 }
 
-function renderPlainBlog() {
+function getPlainBlogContent() {
     const blog = content.blog;
-    if (!blog || !blog.files) return;
+    if (!blog || !blog.files) return '';
 
-    let html = '<h2>Blog</h2>';
-
+    let html = `<div class="blueprint-section"><div class="section-tag">[FIELD_NOTES]</div><div class="blueprint-items">`;
     Object.entries(blog.files).forEach(([filename, post]) => {
         html += `
-            <div class="item">
-                <div class="item-title">${post.title}</div>
-                <div class="item-meta">${post.date}</div>
-                <div class="item-meta">${post.content}</div>
+            <div class="blueprint-item">
+                <div style="font-size: 1.25rem;">${post.title}</div>
+                <div style="font-size: 0.9rem; font-family: var(--font-mono); color: var(--industrial-muted);">${post.date}</div>
+                <div class="blueprint-post-content">${post.content}</div>
             </div>
         `;
     });
-
-    plainContent.innerHTML = html;
+    html += `</div></div>`;
+    return html;
 }
 
 // Initialize Terminal

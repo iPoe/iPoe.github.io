@@ -1,4 +1,36 @@
 {
   "type": "file",
+  "name": "LEONARDO SAEZ WILCHES",
+  "title": "DATA ENGINEER / GAME DEV",
+  "bio": "Founder & Lead Data Engineer at Contactall. Final-year Computer Science student at Pontificia Universidad Javeriana Cali. Specializing in high-performance data architectures and interactive system design.",
+  "blueprint": [
+    {
+      "category": "TECHNICAL_STACK",
+      "items": [
+        "SCALABLE_PIPELINES",
+        "PYSPARK / HADOOP",
+        "SNOWFLAKE / AWS"
+      ]
+    },
+    {
+      "category": "INTERACTIVE",
+      "items": [
+        "GAME_ENGINE_DEV",
+        "SOFTWARE_INNOVATION"
+      ]
+    },
+    {
+      "category": "HUMAN_LAYER",
+      "items": [
+        "SIGN_LANGUAGE",
+        "DRAMATIC_ARTS"
+      ]
+    }
+  ],
+  "contact": {
+    "node": "COMM_PROTOCOL",
+    "email": "leonardosawi12@gmail.com",
+    "github": "https://github.com/iPoe"
+  },
   "content": "\n═══════════════════════════════════════════════════════════════\n   🚀 LEONARDO SAEZ WILCHES | Data Engineer & Game Dev\n═══════════════════════════════════════════════════════════════\n\nI am the Founder & Lead Data Engineer at Contactall and a final-year \nComputer Science student at Pontificia Universidad Javeriana Cali.\n\n─── TECHNICAL FOCUS ───────────────────────────────────────────\n\n• BIG DATA: Scalable Pipelines, PySpark, Hadoop & Snowflake.\n• CLOUD: Architecting robust solutions on AWS.\n• INTERACTIVE: Game Development & Software Innovation.\n\n─── BEYOND THE TERMINAL ───────────────────────────────────────\n\n• COMMUNICATION: Studying Sign Language & Dramatic Arts.\n• RITUALS: Reading novels, cycling, and discovering music.\n\n───────────────────────────────────────────────────────────────\nCONTACT & SOCIAL\n───────────────────────────────────────────────────────────────\nEmail: <a href='mailto:leonardosawi12@gmail.com'>leonardosawi12@gmail.com</a> \n───────────────────────────────────────────────────────────────\n"
 }
