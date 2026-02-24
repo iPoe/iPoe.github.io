@@ -18,13 +18,13 @@
             "title": "Asistente de Investigación y Desarrollador de Datos",
             "organization": "Pontificia Universidad Javeriana Cali",
             "duration": "Ene 2024 - Presente",
-            "description": "Desarrollé una arquitectura full-stack para la automatización de la atención médica usando Python. Diseñé pipelines de datos para analizar canales de comunicación, alcanzando exitosamente más de 800 usuarios. Diseñé módulos robustos de procesamiento de datos backend para mejorar la entrega de servicios."
+            "description": "Desarrollé una arquitectura full-stack (Django REST + Vue.js) para la automatización médica. Diseñé pipelines de datos para analizar canales de comunicación, alcanzando exitosamente a más de 800 usuarios y optimizando la gestión de pacientes."
         },
         "position3.txt": {
             "title": "Ingeniero Full Stack (Enfoque en Datos)",
             "organization": "Qubika",
             "duration": "Feb 2023 - Ene 2024",
-            "description": "Diseñé e implementé APIs GraphQL, modelando efectivamente esquemas de datos para un acceso eficiente. Construí bases de código escalables en entornos Dockerizados para clientes internacionales y colaboré en la integración de tecnología en flujos de trabajo de atención al paciente."
+            "description": "Diseñé e implementé APIs GraphQL con Ruby on Rails, modelando esquemas de datos complejos para un acceso eficiente. Construí bases de código escalables en entornos Dockerizados para clientes internacionales."
         },
         "education1.txt": {
             "title": "Ingeniería de Sistemas",

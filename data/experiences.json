@@ -18,13 +18,13 @@
       "title": "Research Assistant & Data Developer",
       "organization": "Pontificia Universidad Javeriana Cali",
       "duration": "Jan 2024 - Present",
-      "description": "Developed full-stack architecture for healthcare automation using Python. Engineered data pipelines to analyze communication channels, successfully reaching 800+ users. Designed robust backend data processing modules to enhance service delivery."
+      "description": "Developed full-stack architecture (Django REST + Vue.js) for healthcare automation. Engineered data pipelines to analyze communication channels, successfully reaching 800+ users and optimizing patient-care workflows."
     },
     "position3.txt": {
       "title": "Full Stack Engineer (Data Focus)",
       "organization": "Qubika",
       "duration": "Feb 2023 - Jan 2024",
-      "description": "Designed and implemented GraphQL APIs, effectively modeling data schemas for efficient access. Built scalable codebases in Dockerized environments for international clients and collaborated on integrating technology into patient care workflows."
+      "description": "Designed and implemented GraphQL APIs with Ruby on Rails, modeling complex data schemas for efficient access. Built scalable, Dockerized codebases for international clients and collaborated on mission-critical feature deployment."
     },
     "education1.txt": {
       "title": "B.S. Computer Science (Ingeniería de Sistemas)",
@@ -34,4 +34,3 @@
     }
   }
 }
-
