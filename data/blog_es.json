@@ -6,6 +6,11 @@
             "title": "¡Bienvenido a mi sitio web!",
             "date": "6 de febrero de 2026",
             "content": "¡Gracias por pasar, gracias a Abe Hou por crear una plantilla tan increíble!"
+        },
+        "soup-group.txt": {
+            "title": "Presentando Soup-Group: Una 'Sopa' de Agentes Cooperativos",
+            "date": "23 de febrero de 2026",
+            "content": "Recientemente hemos estado trabajando en un nuevo invento: soup-group. Es un Sistema de Revisión Cooperativa con Delegación Inteligente que utiliza una estrategia de 'Divide y Vencerás' para optimizar el uso de tokens en un ~90%. Con una arquitectura basada en roles (Gerente y Trabajadores) y soporte Human-in-the-Loop, está diseñado para hacer que las revisiones de documentos sean más rápidas e inteligentes. Échale un vistazo en: https://codeberg.org/iPoe/soup-group"
         }
     }
 }

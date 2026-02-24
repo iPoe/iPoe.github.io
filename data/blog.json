@@ -6,6 +6,11 @@
       "title": "Welcome to my website!",
       "date": "February 6, 2026",
       "content": "Thanks for passing by, thanks to Abe Hou for creating such an awesome template!"    
+    },
+    "soup-group.txt": {
+      "title": "Introducing Soup-Group: A 'Soup' of Cooperative Agents",
+      "date": "February 23, 2026",
+      "content": "Recently, we've been working on a new invention: soup-group. It's a Cooperative Review System with Intelligent Delegation that uses a 'Divide & Conquer' strategy to optimize token usage by ~90%. With a role-based architecture (Manager and Workers) and Human-in-the-Loop support, it's designed to make document reviews faster and smarter. Check it out at: https://codeberg.org/iPoe/soup-group"
     }
   }
 }
